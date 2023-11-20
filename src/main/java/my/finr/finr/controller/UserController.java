@@ -25,7 +25,12 @@ public class UserController {
     @GetMapping
     public ResponseEntity<Object> getUsers(@RequestParam(name = "role", required = false) String role) {
         try {
-            List<User> users = userService.findAll(RoleEnum.valueOf(role));
+            List<User> users;
+            if(role != null){
+                users = userService.findAll(RoleEnum.valueOf(role.toUpperCase()));
+            }else{
+                users = userService.findAll();
+            }
             return ResponseEntity.ok(users);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest()

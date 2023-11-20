@@ -43,7 +43,6 @@ public class SecurityFilter extends OncePerRequestFilter {
             }
         });
         filterChain.doFilter(request, response);
-
     }
 
     private Optional<String> getTokenByRequest(HttpServletRequest request) {
