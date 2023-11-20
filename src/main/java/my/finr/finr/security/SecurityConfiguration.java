@@ -1,6 +1,7 @@
 package my.finr.finr.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,6 +19,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfiguration {
 
+    //TODO chave para "remember me" no futuro 
+    // @Value("${api.security.token.secret}")
+    // private String secret;
+
     @Autowired
     SecurityFilter securityFilter;
 
@@ -33,6 +38,7 @@ public class SecurityConfiguration {
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
+                //TODO implementar rememberMe()
     }
 
     @Bean
